@@ -180,7 +180,7 @@ class Prestamos extends Controller
        // Save the Y position before the MultiCell
         $y_before = $pdf->GetY();
         // Create the first cell with name and code
-        $pdf->MultiCell(35, 5, $prestamo['nombre']. "\n". $prestamo['codigo'], 1, 'L');
+        $pdf->MultiCell(35, 5, $prestamo['nombre']. "\n". $prestamo['telefono'], 1, 'L');
         // Position for the second cell - to the right of the first cell, at the original Y position
         $pdf->SetXY($pdf->GetX() + 35, $y_before);
         // Create the second cell with career information
