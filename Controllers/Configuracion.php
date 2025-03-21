@@ -103,7 +103,7 @@ class Configuracion extends Controller
         $pdf = new FPDF('P', 'mm', 'letter');
         $pdf->AddPage();
         $pdf->SetMargins(10, 10, 10);
-        $pdf->SetTitle("Prestamos");
+        $pdf->SetTitle("Prestamos pro");
         $pdf->SetFont('Arial', 'B', 12);
         $pdf->Cell(195, 5, utf8_decode($datos['nombre']), 0, 1, 'C');
 

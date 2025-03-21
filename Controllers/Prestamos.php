@@ -87,7 +87,7 @@ class Prestamos extends Controller
             header('Location: ' . base_url . 'Configuracion/vacio');
         }
         require_once 'Libraries/pdf/fpdf.php';
-        $pdf = new FPDF('P', 'mm', 'letter');
+        $pdf = new FPDF('L', 'mm', 'letter');
         $pdf->AddPage();
         $pdf->SetMargins(10, 10, 10);
         $pdf->SetTitle("Prestamos");
@@ -138,14 +138,14 @@ class Prestamos extends Controller
             header('Location: '.base_url. 'Configuracion/vacio');
         }
         require_once 'Libraries/pdf/fpdf.php';
-        $pdf = new FPDF('P', 'mm', array(80, 200));
+        $pdf = new FPDF('P', 'mm', array(83, 126));
         $pdf->AddPage();
         $pdf->SetMargins(5, 5, 5);
         $pdf->SetTitle("Prestamos");
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(65, 5, utf8_decode($datos['nombre']), 0, 1, 'C');
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(60, 5, utf8_decode($datos['nombre']), 0, 1, 'C');
 
-        $pdf->Image(base_url . "Assets/img/logo.png", 55, 15, 20, 20, 'PNG');
+        $pdf->Image(base_url . "Assets/img/logo.png", 62, 15, 16, 18, 'PNG');
         $pdf->SetFont('Arial', 'B', 8);
         $pdf->Cell(15, 5, utf8_decode("Teléfono: "), 0, 0, 'L');
         $pdf->SetFont('Arial', '', 8);
@@ -155,18 +155,18 @@ class Prestamos extends Controller
         $pdf->SetFont('Arial', '', 8);
         $pdf->Cell(15, 5, utf8_decode($datos['direccion']), 0, 1, 'L');
         $pdf->SetFont('Arial', 'B', 8);
-        $pdf->Cell(15, 5, "Correo: ", 0, 0, 'L');
-        $pdf->SetFont('Arial', '', 8);
+        $pdf->Cell(15, 5, "Correo:", 0, 0, 'L');
+        $pdf->SetFont('Arial','', 8);
         $pdf->Cell(15, 5, utf8_decode($datos['correo']), 0, 1, 'L');
         $pdf->Ln();
-        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->SetFont('Arial', 'B', 10);
         $pdf->SetFillColor(0, 0, 0);
         $pdf->SetTextColor(255, 255, 255);
         $pdf->Cell(72, 5, "Detalle de Prestamos", 1, 1, 'C', 1);
         $pdf->SetTextColor(0, 0, 0);
         $pdf->Cell(60, 5, 'Libros', 1, 0, 'L');
         $pdf->Cell(12, 5, 'Cant.', 1, 1, 'L');
-        $pdf->SetFont('Arial', '', 8);
+        $pdf->SetFont('Arial', '', 10);
         $pdf->Cell(60, 5, utf8_decode($prestamo['titulo']), 1, 0, 'L');
         $pdf->Cell(12, 5, $prestamo['cantidad'], 1, 1, 'L');
         $pdf->Ln();
@@ -177,10 +177,16 @@ class Prestamos extends Controller
         $pdf->Cell(35, 5, 'Nombre.', 1, 0, 'L');
         $pdf->Cell(37, 5, 'Carrera.', 1, 1, 'L');
         $pdf->SetFont('Arial', '', 8);
-        $pdf->Cell(35, 5, $prestamo['nombre'], 1, 0, 'L');
-        $pdf->Cell(37, 5, $prestamo['carrera'], 1, 1, 'L');
+       // Save the Y position before the MultiCell
+        $y_before = $pdf->GetY();
+        // Create the first cell with name and code
+        $pdf->MultiCell(35, 5, $prestamo['nombre']. "\n". $prestamo['codigo'], 1, 'L');
+        // Position for the second cell - to the right of the first cell, at the original Y position
+        $pdf->SetXY($pdf->GetX() + 35, $y_before);
+        // Create the second cell with career information
+        $pdf->Cell(37, 15, $prestamo['carrera'], 1, 1, 'L');
         $pdf->Ln();
-        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->SetFont('Arial', 'B', 12);
         $pdf->Cell(72, 5, 'Fecha Prestamo', 0, 1, 'C');
         $pdf->SetFont('Arial', '', 10);
         $pdf->Cell(72, 5, $prestamo['fecha_prestamo'], 0, 1, 'C');

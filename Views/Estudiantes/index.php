@@ -15,7 +15,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Código</th>
-                                <th>Dni</th>
+                                <th>N° Carnet</th>
                                 <th>Nombre</th>
                                 <th>Carrera</th>
                                 <th>Dirección</th>
@@ -53,11 +53,11 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="dni">Dni</label>
+                                <label for="dni">N° Carnet</label>
                                 <input id="dni" class="form-control" type="text" name="dni" required placeholder="Dni">
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12">|
                             <div class="form-group">
                                 <label for="nombre">Nombre</label>
                                 <input id="nombre" class="form-control" type="text" name="nombre" required placeholder="Nombre completo">
